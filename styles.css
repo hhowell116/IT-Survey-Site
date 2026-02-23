@@ -107,6 +107,9 @@ body {
   flex: 1;
 }
 
+/* =====================
+   NAV BUTTONS
+   ===================== */
 .nav-btn {
   display: flex;
   align-items: center;
@@ -114,8 +117,8 @@ body {
   width: 100%;
   padding: 10px 12px;
   border-radius: 10px;
-  border: 1px solid transparent;
-  background: transparent;
+  border: 1.5px solid var(--sb-border);
+  background: var(--sidebar-bg);
   color: var(--sb-text);
   font-family: inherit;
   font-size: 0.875rem;
@@ -123,17 +126,22 @@ body {
   cursor: pointer;
   text-align: left;
   transition: all 0.18s ease;
+  box-shadow: 0 2px 6px rgba(95, 75, 60, 0.07);
 }
 
 .nav-btn:hover {
   background: var(--brand-soft);
-  border-color: var(--sb-border);
+  border-color: var(--brand-hover-border);
+  transform: translateX(3px);
+  box-shadow: 0 4px 12px rgba(95, 75, 60, 0.13);
 }
 
 .nav-btn.active {
   background: var(--brand-grad);
   border-color: var(--brand-brown);
   color: #ffffff;
+  transform: translateX(3px);
+  box-shadow: 0 4px 12px rgba(95, 75, 60, 0.25);
 }
 
 .nav-icon { font-size: 1rem; }
@@ -216,8 +224,10 @@ body {
 
 .topbar-left {
   display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .topbar-title {
@@ -231,6 +241,7 @@ body {
   font-size: 0.78rem;
   color: var(--sb-muted);
   font-weight: 400;
+  white-space: nowrap;
 }
 
 .topbar-right {
@@ -322,7 +333,6 @@ body {
   cursor: default;
 }
 
-/* Per-colour gradients & shadows */
 .card.brown {
   background: linear-gradient(145deg, #ffffff 0%, #ede8e2 100%);
   box-shadow: 0 4px 6px rgba(95,75,60,0.06), 0 10px 30px rgba(95,75,60,0.1);
@@ -349,7 +359,6 @@ body.dark .card.yellow { background: linear-gradient(145deg, #33383f 0%, #352e28
 .card.green:hover  { box-shadow: 0 8px 12px rgba(46,204,138,0.08), 0 20px 48px rgba(46,204,138,0.13); }
 .card.yellow:hover { box-shadow: 0 8px 12px rgba(245,166,35,0.08), 0 20px 48px rgba(245,166,35,0.13); }
 
-/* coloured top stripe */
 .card::before {
   content: '';
   position: absolute;
@@ -684,24 +693,6 @@ body.dark .card.yellow { background: linear-gradient(145deg, #33383f 0%, #352e28
 }
 
 .completed-card { max-width: 420px; }
-
-/* =====================
-   TOPBAR INLINE DESC
-   ===================== */
-.topbar-left {
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-
-.topbar-desc {
-  font-size: 0.78rem;
-  color: var(--sb-muted);
-  font-weight: 400;
-  white-space: nowrap;
-}
 
 /* =====================
    SURVEY LAYOUT
