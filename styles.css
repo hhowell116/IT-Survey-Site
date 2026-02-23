@@ -502,6 +502,107 @@ body {
 .google-btn img { width: 20px; height: 20px; }
 
 /* =====================
+   CONTACT BUTTON
+   ===================== */
+.contact-btn {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--sb-border);
+  background: transparent;
+  color: var(--sb-text);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.18s ease;
+  margin-bottom: 10px;
+}
+
+.contact-btn:hover {
+  background: var(--brand-soft);
+  border-color: var(--sb-border);
+}
+
+.contact-btn.active {
+  background: var(--brand-grad);
+  border-color: var(--brand-brown);
+  color: #ffffff;
+}
+
+/* =====================
+   CONTACT FORM
+   ===================== */
+.contact-form-wrap {
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.contact-field label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--sb-text);
+}
+
+.contact-field input,
+.contact-field textarea {
+  background: var(--sidebar-bg);
+  border: 2px solid var(--sb-border);
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: var(--sb-text);
+  transition: border-color 0.18s;
+  resize: vertical;
+  outline: none;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  border-color: var(--brand-hover-border);
+}
+
+.contact-field input[readonly] {
+  color: var(--sb-muted);
+  cursor: default;
+}
+
+.contact-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0.25rem;
+}
+
+.clear-btn {
+  background: transparent;
+  border: 2px solid var(--sb-border);
+  color: var(--sb-muted);
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.18s;
+}
+
+.clear-btn:hover {
+  border-color: var(--brand-hover-border);
+  color: var(--sb-text);
+}
+
+/* =====================
    RESPONSIVE
    ===================== */
 @media (max-width: 900px) {
