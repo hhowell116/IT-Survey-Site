@@ -70,7 +70,7 @@
     // ── Survey definition ───────────────────────────────
     const SECTIONS = [
       { id: 'info',       title: 'Your Information',              type: 'info' },
-      { id: 'comm',       title: 'Communication',                 type: 'tools', examples: 'Email clients, messaging, video conferencing, VoIP — e.g. Slack, Microsoft Teams' },
+      { id: 'comm',       title: 'Communication',                 type: 'tools', examples: 'Email clients, messaging, video conferencing, VoIP — e.g. Slack, Microsoft Teams, Gmail' },
       { id: 'prod',       title: 'Productivity & Collaboration',  type: 'tools', examples: 'Document creation, file storage, cloud drives, office suites — e.g. Google Workspace, Microsoft 365, Notion, Dropbox' },
       { id: 'pm',         title: 'Project Management',            type: 'tools', examples: 'Task tracking, project planning, ticketing, workflow — e.g. Asana, Monday.com' },
       { id: 'hr',         title: 'HR & People Management',        type: 'tools', examples: 'HRIS, payroll, recruiting/ATS, performance, onboarding — e.g. BambooHR, ADP' },
@@ -121,8 +121,11 @@
           <option value="">–</option><option>Personal</option><option>Shared / Team</option>
         </select>
         <div class="who-cell">
-          <label class="check-label"><input type="checkbox" data-key="${base}_alldept"/> Entire Dept.</label>
-          <input class="ti ti-sm" type="text" placeholder="or list names / emails" data-key="${base}_who"/>
+          <div class="who-checks">
+            <label class="check-label"><input type="checkbox" data-key="${base}_alldept"/> Entire Dept.</label>
+            <label class="check-label"><input type="checkbox" data-key="${base}_myself"/> Myself</label>
+          </div>
+          <input class="ti ti-sm" type="text" placeholder="Other names / emails" data-key="${base}_who"/>
         </div>
         <input class="ti" type="text" placeholder="e.g. Admin, Viewer" data-key="${base}_perm"/>
         <input class="ti" type="text" placeholder="Optional" data-key="${base}_notes"/>
