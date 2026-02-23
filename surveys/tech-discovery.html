@@ -427,17 +427,12 @@
           body: JSON.stringify(payload)
         });
 
-        // Save to localStorage for My Completed tab
-        const submissions = JSON.parse(localStorage.getItem('rco_submissions') || '[]');
-        submissions.unshift({
-          title: 'Technology & Application Discovery Survey',
-          dept:  surveyData['info_dept']  || '—',
-          email: surveyData['info_email'] || '—',
-          date:  new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' }),
-          url:   'surveys/tech-discovery.html'
-        });
-        localStorage.setItem('rco_submissions', JSON.stringify(submissions));
-
+       // Save to Firestore for My Completed tab
+await window.saveSubmission({
+  title: 'Technology & Application Discovery Survey',
+  dept:  surveyData['info_dept'] || '—',
+  url:   'surveys/tech-discovery.html'
+});
         const el = document.getElementById('submitStatus');
         if (el) {
           el.textContent = '✅ Survey submitted! Redirecting you back to the portal...';
