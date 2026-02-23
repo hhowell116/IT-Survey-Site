@@ -18,9 +18,7 @@ const FIREBASE_CONFIG = {
 };
 
 const ALLOWED_DOMAIN    = '@rowecasaorganics.com';
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // ← replace after EmailJS setup
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // ← replace
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // ← replace
+
 
 // ── Firebase init ─────────────────────────────────────────────
 const app  = initializeApp(FIREBASE_CONFIG);
@@ -53,14 +51,12 @@ window.showSection = function(name, btn) {
   if (btn) btn.classList.add('active');
 };
 
-// ── EmailJS contact form ──────────────────────────────────────
-emailjs.init(EMAILJS_PUBLIC_KEY);
-
+// ── Contact form — opens Gmail compose with fields pre-filled ─
 const sendBtn  = document.getElementById('sendBtn');
 const clearBtn = document.getElementById('clearBtn');
 
 if (sendBtn) {
-  sendBtn.addEventListener('click', async () => {
+  sendBtn.addEventListener('click', () => {
     const from    = document.getElementById('contactFrom')?.value.trim();
     const subject = document.getElementById('contactSubject')?.value.trim();
     const body    = document.getElementById('contactBody')?.value.trim();
@@ -69,24 +65,17 @@ if (sendBtn) {
     if (!subject) { setContactStatus('error', 'Please enter a subject.'); return; }
     if (!body)    { setContactStatus('error', 'Please enter a message.'); return; }
 
-    sendBtn.textContent = 'Sending...';
-    sendBtn.disabled = true;
+    const fullBody = `From: ${from}\n\n${body}`;
 
-    try {
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-        from_email: from,
-        to_email:   'itsupport@rowecasaorganics.com',
-        subject,
-        message:    body
-      });
-      setContactStatus('success', '✅ Message sent! The IT team will be in touch shortly.');
-      clearContactForm();
-    } catch(e) {
-      setContactStatus('error', '❌ Failed to send. Please email itsupport@rowecasaorganics.com directly.');
-    } finally {
-      sendBtn.textContent = 'Send Message →';
-      sendBtn.disabled = false;
-    }
+    // Build Gmail compose URL with everything pre-filled
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1`
+      + `&to=${encodeURIComponent('itsupport@rowecasaorganics.com')}`
+      + `&su=${encodeURIComponent(subject)}`
+      + `&body=${encodeURIComponent(fullBody)}`;
+
+    window.open(gmailUrl, '_blank');
+
+    setContactStatus('success', '✅ Gmail opened with your message ready to send!');
   });
 }
 
