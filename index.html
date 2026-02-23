@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IT Surveys — Internal Portal</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- LOCK OVERLAY -->
+  <div class="lock-overlay" id="lockOverlay">
+    <div class="lock-modal">
+      <div class="lock-icon">🔒</div>
+      <h2>IT Internal Portal</h2>
+      <p>This portal is restricted to company staff only. Please sign in with your work Google account to continue.</p>
+      <div class="domain-note">Only <strong>@yourcompany.com</strong> accounts are permitted.</div>
+      <button class="google-btn" onclick="dismissLock()">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google"/>
+        Sign in with Google
+      </button>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <!-- Replace src with path to your logo file e.g. assets/logo.png -->
+      <img src="assets/logo.png" alt="Company Logo" class="logo-img" />
+      IT Portal <span>/ Surveys & Forms</span>
+    </div>
+    <div class="header-right">
+      <button class="login-btn" onclick="showLock()">🔑 Sign In</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">🏢 Internal Use Only</div>
+    <h1>IT Surveys &<br/><span>Internal Forms</span></h1>
+    <p>A central hub for all IT-related surveys and data collection forms. Complete your assigned surveys below to help our team manage technology across the organization.</p>
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Active Surveys</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">0</span>
+        <span class="stat-label">Completed by You</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">343</span>
+        <span class="stat-label">Staff Members</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SURVEY CARDS -->
+  <div class="section-header">
+    <h2>Available Surveys</h2>
+    <span>Sign in to submit responses</span>
+  </div>
+
+  <div class="cards">
+
+    <div class="card brown">
+      <div class="card-top">
+        <div class="card-icon brown">📦</div>
+        <span class="card-status status-active">Active</span>
+      </div>
+      <h3>Technology & Application Discovery Survey</h3>
+      <p>Help us build a complete inventory of every tool, app, SaaS platform, and account used across your department. For team leads and managers.</p>
+      <div class="card-meta">
+        <div class="card-meta-left">
+          <span class="meta-label">Est. completion time</span>
+          <span class="meta-value">10 – 15 mins</span>
+        </div>
+        <button class="card-action" onclick="showLock()">Start Survey →</button>
+      </div>
+    </div>
+
+    <div class="card green">
+      <div class="card-top">
+        <div class="card-icon green">🔐</div>
+        <span class="card-status status-draft">Draft</span>
+      </div>
+      <h3>Access & Permissions Audit</h3>
+      <p>Review and confirm the access levels and permissions your team members currently hold across key systems and platforms.</p>
+      <div class="card-meta">
+        <div class="card-meta-left">
+          <span class="meta-label">Est. completion time</span>
+          <span class="meta-value">5 – 10 mins</span>
+        </div>
+        <button class="card-action disabled">Coming Soon</button>
+      </div>
+    </div>
+
+    <div class="card yellow">
+      <div class="card-top">
+        <div class="card-icon yellow">🖥️</div>
+        <span class="card-status status-draft">Draft</span>
+      </div>
+      <h3>Hardware & Device Inventory</h3>
+      <p>Submit a record of all company-owned or personal devices used to access company systems, including laptops, phones, and peripherals.</p>
+      <div class="card-meta">
+        <div class="card-meta-left">
+          <span class="meta-label">Est. completion time</span>
+          <span class="meta-value">5 mins</span>
+        </div>
+        <button class="card-action disabled">Coming Soon</button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    IT Portal — Internal Use Only &nbsp;·&nbsp; @yourcompany.com accounts only &nbsp;·&nbsp; Powered by GitHub Pages
+  </footer>
+
+  <script>
+    function showLock() {
+      document.getElementById('lockOverlay').style.display = 'flex';
+    }
+    function dismissLock() {
+      document.getElementById('lockOverlay').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
