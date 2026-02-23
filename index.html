@@ -81,7 +81,7 @@
 
             <div class="card brown">
               <div class="card-top">
-                <div class="card-icon brown">📦</div>
+                <div class="card-icon brown"></div>
                 <span class="card-status status-active">Active</span>
               </div>
               <h3>Technology & Application Discovery Survey</h3>
@@ -91,13 +91,13 @@
                   <span class="meta-label">Est. completion time</span>
                   <span class="meta-value">10 – 15 mins</span>
                 </div>
-                <button class="card-action" onclick="showLock()">Start →</button>
+                <button class="card-action" onclick="window.location.href='surveys/tech-discovery.html'">Start →</button>
               </div>
             </div>
 
             <div class="card green">
               <div class="card-top">
-                <div class="card-icon green">🔐</div>
+                <div class="card-icon green"></div>
                 <span class="card-status status-draft">Draft</span>
               </div>
               <h3>Access & Permissions Audit</h3>
@@ -113,7 +113,7 @@
 
             <div class="card yellow">
               <div class="card-top">
-                <div class="card-icon yellow">🖥️</div>
+                <div class="card-icon yellow"></div>
                 <span class="card-status status-draft">Draft</span>
               </div>
               <h3>Hardware & Device Inventory</h3>
@@ -140,37 +140,37 @@
 
             <div class="card green">
               <div class="card-top">
-                <div class="card-icon green">🧑‍💼</div>
-                <span class="card-status status-active">Active</span>
+                <div class="card-icon green"></div>
+                <span class="card-status status-draft">In Progress</span>
               </div>
               <h3>User Onboarding Request</h3>
               <p>Submit everything IT needs to provision a new employee — role, system access, devices, and software requirements.</p>
               <div class="card-meta">
-                <button class="card-action" onclick="showLock()">Submit →</button>
+                <button class="card-action disabled">Coming Soon</button>
               </div>
             </div>
 
             <div class="card yellow">
               <div class="card-top">
-                <div class="card-icon yellow">🚪</div>
-                <span class="card-status status-active">Active</span>
+                <div class="card-icon yellow"></div>
+                <span class="card-status status-draft">In Progress</span>
               </div>
               <h3>User Offboarding Request</h3>
               <p>Capture separation details for a departing employee — access revocation, email handling, file transfer, and device return.</p>
               <div class="card-meta">
-                <button class="card-action" onclick="showLock()">Submit →</button>
+                <button class="card-action disabled">Coming Soon</button>
               </div>
             </div>
 
             <div class="card brown">
               <div class="card-top">
-                <div class="card-icon brown">🛠️</div>
-                <span class="card-status status-active">Active</span>
+                <div class="card-icon brown"></div>
+                <span class="card-status status-draft">In Progress</span>
               </div>
               <h3>IT Equipment & Software Request</h3>
               <p>Request any technology need — hardware, software, or licenses — with business justification and manager approval workflow.</p>
               <div class="card-meta">
-                <button class="card-action" onclick="showLock()">Submit →</button>
+                <button class="card-action disabled">Coming Soon</button>
               </div>
             </div>
 
@@ -227,44 +227,39 @@
   </div>
 
   <script>
-    // ── EmailJS ──────────────────────────────────────────
-    // Replace these three values after setting up EmailJS at emailjs.com:
-    //   1. Go to emailjs.com → create a free account
-    //   2. Add an Email Service (Gmail works great) → copy the Service ID
-    //   3. Create an Email Template → copy the Template ID
-    //   4. Go to Account → copy your Public Key
-    const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // ← replace
-    const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // ← replace
-    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // ← replace
-
+    const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+    const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
     emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    function showLock() { document.getElementById('lockOverlay').style.display = 'flex'; }
+    function dismissLock() { document.getElementById('lockOverlay').style.display = 'none'; }
+
+    function showSection(name, btn) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn, .contact-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('section-' + name).classList.add('active');
+      if (btn) btn.classList.add('active');
+    }
 
     async function sendContactEmail() {
       const from    = document.getElementById('contactFrom').value.trim();
       const subject = document.getElementById('contactSubject').value.trim();
       const body    = document.getElementById('contactBody').value.trim();
-      const status  = document.getElementById('contactStatus');
       const btn     = document.getElementById('sendBtn');
-
       if (!from)    { showStatus('error', 'Please enter your email address.'); return; }
       if (!subject) { showStatus('error', 'Please enter a subject.'); return; }
       if (!body)    { showStatus('error', 'Please enter a message.'); return; }
-
       btn.textContent = 'Sending...';
       btn.disabled = true;
-
       try {
         await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-          from_email: from,
-          to_email:   'itsupport@rowecasaorganics.com',
-          subject:    subject,
-          message:    body,
+          from_email: from, to_email: 'itsupport@rowecasaorganics.com', subject, message: body
         });
         showStatus('success', '✅ Message sent! The IT team will be in touch shortly.');
         clearContactForm();
-      } catch (err) {
-        console.error('EmailJS error:', err);
-        showStatus('error', '❌ Failed to send. Please try again or email itsupport@rowecasaorganics.com directly.');
+      } catch(e) {
+        showStatus('error', '❌ Failed to send. Please email itsupport@rowecasaorganics.com directly.');
       } finally {
         btn.textContent = 'Send Message →';
         btn.disabled = false;
@@ -278,20 +273,7 @@
     }
 
     function clearContactForm() {
-      document.getElementById('contactFrom').value    = '';
-      document.getElementById('contactSubject').value = '';
-      document.getElementById('contactBody').value    = '';
-    }
-
-    // ── Nav ──────────────────────────────────────────────
-    function showLock() { document.getElementById('lockOverlay').style.display = 'flex'; }
-    function dismissLock() { document.getElementById('lockOverlay').style.display = 'none'; }
-
-    function showSection(name, btn) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.nav-btn, .contact-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('section-' + name).classList.add('active');
-      if (btn) btn.classList.add('active');
+      ['contactFrom','contactSubject','contactBody'].forEach(id => document.getElementById(id).value = '');
     }
   </script>
 
