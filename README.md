@@ -1,8 +1,10 @@
 # RCO IT Help Site
 
-An internal IT portal for Rowe Casa Organics staff. Hosted on GitHub Pages.
+An internal IT portal for Rowe Casa Organics staff.
 
-🔗 **Live Site:** 
+**View the live demo:** [hhowell116.github.io/Demo-RCO-Help-Site](https://hhowell116.github.io/Demo-RCO-Help-Site/)
+
+> The demo site uses mock authentication and in-memory submissions. This repo contains the production source code with Firebase Auth and Firestore.
 
 ---
 
